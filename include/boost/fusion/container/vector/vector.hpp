@@ -233,30 +233,30 @@ namespace boost { namespace fusion
 
             template <std::size_t N, typename U>
             static BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-            U& at_detail(store<N, U>* this_)
+            U& at_detail(store<N, U>& this_)
             {
-                return this_->elem;
+                return this_.elem;
             }
 
             template <std::size_t N, typename U>
             static BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-            U const& at_detail(store<N, U> const* this_)
+            U const& at_detail(store<N, U> const& this_)
             {
-                return this_->elem;
+                return this_.elem;
             }
 
             template <typename J>
             BOOST_CXX14_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-            auto at_impl(J) -> decltype(at_detail<J::value>(&std::declval<vector_data&>()))
+            auto at_impl(J) -> decltype(at_detail<J::value>(std::declval<vector_data&>()))
             {
-                return at_detail<J::value>(this);
+                return at_detail<J::value>(*this);
             }
 
             template <typename J>
             BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-            auto at_impl(J) const -> decltype(at_detail<J::value>(&std::declval<vector_data const&>()))
+            auto at_impl(J) const -> decltype(at_detail<J::value>(std::declval<vector_data const&>()))
             {
-                return at_detail<J::value>(this);
+                return at_detail<J::value>(*this);
             }
         };
     } // namespace boost::fusion::vector_detail
