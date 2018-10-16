@@ -16,12 +16,12 @@ namespace boost { namespace fusion
 {
     namespace detail
     {
-        struct from_sequence_convertible_type
+        struct native_fusion_sequence_tag
         {};
     }
 
     template <typename Sequence>
-    struct sequence_base
+    struct sequence_base : detail::native_fusion_sequence_tag
     {
         BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED
         Sequence const&
@@ -35,12 +35,6 @@ namespace boost { namespace fusion
         derived() BOOST_NOEXCEPT
         {
             return static_cast<Sequence&>(*this);
-        }
-
-        BOOST_CONSTEXPR BOOST_FUSION_GPU_ENABLED
-        operator detail::from_sequence_convertible_type() const BOOST_NOEXCEPT
-        {
-            return detail::from_sequence_convertible_type();
         }
     };
 

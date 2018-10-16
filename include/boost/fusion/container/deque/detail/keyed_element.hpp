@@ -12,6 +12,7 @@
 #include <boost/fusion/support/detail/access.hpp>
 #include <boost/fusion/iterator/deref.hpp>
 #include <boost/fusion/iterator/next.hpp>
+#include <boost/type_traits/is_convertible.hpp>
 
 #if !defined(BOOST_NO_CXX11_RVALUE_REFERENCES) && BOOST_WORKAROUND(BOOST_GCC, / 100 == 404)
 #include <boost/core/enable_if.hpp>

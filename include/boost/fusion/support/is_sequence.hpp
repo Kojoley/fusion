@@ -13,7 +13,7 @@
 #include <boost/fusion/support/detail/is_native_fusion_sequence.hpp>
 #include <boost/mpl/bool.hpp>
 #include <boost/mpl/is_sequence.hpp>
-#include <boost/type_traits/is_convertible.hpp>
+#include <boost/type_traits/is_base_of.hpp>
 
 namespace boost { namespace fusion
 {
@@ -31,7 +31,7 @@ namespace boost { namespace fusion
         {
             template <typename Sequence>
             struct apply
-              : is_convertible<Sequence, fusion::detail::from_sequence_convertible_type>
+              : is_base_of<fusion::detail::native_fusion_sequence_tag, Sequence>
             {};
         };
 

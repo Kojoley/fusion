@@ -10,8 +10,8 @@
 #include <boost/fusion/support/config.hpp>
 #include <boost/fusion/support/sequence_base.hpp>
 #include <boost/mpl/and.hpp>
+#include <boost/type_traits/is_base_of.hpp>
 #include <boost/type_traits/is_complete.hpp>
-#include <boost/type_traits/is_convertible.hpp>
 
 namespace boost { namespace fusion { namespace detail
 {
@@ -19,7 +19,7 @@ namespace boost { namespace fusion { namespace detail
     struct is_native_fusion_sequence
       : mpl::and_<
           is_complete<Sequence>
-        , is_convertible<Sequence, detail::from_sequence_convertible_type>
+        , is_base_of<detail::native_fusion_sequence_tag, Sequence>
       >
     {};
 }}}
